@@ -57,3 +57,114 @@ if (a === 1) {
 if (a === 1 && b === 2) {
     console.log('a is 1 and b is 2');
 }
+
+for (let i = 0; i < 10; i++) {
+    console.log(i)
+}
+
+for (let i = 0; i < 20; i++) {
+    if (i % 2 == 0) {
+        console.log(i);
+    }
+}
+
+let names = ['Sam', 'Tom', 'Bob'];
+for (let i = 0; i < names.length; i++) {
+    console.log(names[i]);
+}
+
+let q = 12;
+ while (q < 10) {
+     console.log(q)
+     q++;
+ }
+
+ do {
+     console.log(q);
+ } while (q < 10)
+
+ for (i in names) {
+     console.log(names[i]);
+ }
+
+let fullName = window.prompt('What is your name?');
+window.alert('Welcome, ' + fullName);
+
+
+//Arrays
+
+var customerNames = [];
+customerNames.push('Sam Smith');
+customerNames.push('Tommy Guns');
+customerNames.push('Tom Jones');
+customerNames.push('Chad Chaddington');
+
+for (let i = 0; i < customerNames.length; i++){
+  console.log(customerNames[i]);  
+}
+
+for (name of customerNames){
+    console.log(name);
+}
+
+//Functions
+
+function myFunction() {
+    for (let i = 0; i < 100; i++){
+        console.log(i);
+    }
+}
+
+function createFullName(firstName, lastName){
+     console.log(firstName + ' ' + lastName);
+ }
+
+createFullName('Tom', 'Sawyer');
+
+function createFullName(firstName, lastName){
+    return firstName + ' ' + lastName;
+}
+var fullName = createFullName('Tom', 'Sawyer');
+
+//Arrays 2
+
+let names = ['Sam', 'Tom', 'Eric', 'Sally', 'Nick'];
+let lengths = names.map(function(element){
+    return element.length;
+});
+console.log(lengths);
+
+let sum = lengths.reduce(function(accumulator, currentValue){
+    return accumulator + currentValue;
+});
+console.log(sum);
+
+names.forEach(function(element){
+    console.log(element);
+});
+
+let evens = names.filter(function(element){
+    return element.length % 2 == 0;
+});
+console.log(evens);
+
+let removedElement = names.splice(1, 1);
+console.log(removedElement);
+
+
+//Objects
+
+let dvdPlayer = {
+    height: 3,
+    width: 18,
+    depth: 12,
+    weight: 7,
+    color: 'black',
+    dvdName: 'Mulan',
+    printDVDName: function() {
+        console.log(this.dvdName);
+    }
+}
+
+console.log(dvdPlayer.depth);
+dvdPlayer.printDVDName();
