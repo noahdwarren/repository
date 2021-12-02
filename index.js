@@ -1,3 +1,4 @@
+
 let firstName = 'Sam';
 
 if (firstName === 'Noah') {
@@ -168,3 +169,269 @@ let dvdPlayer = {
 
 console.log(dvdPlayer.depth);
 dvdPlayer.printDVDName();
+
+//Templete Literals
+//you can use backticks `` in place of '' or "" to create templates that follow line breaks or allow you to do math in a string.
+let mystring = `hello
+world
+my 
+name
+is
+Noah.`;
+
+console.log(mystring);
+
+console.log(`six times five = ${5 * 6}`);
+
+//arrow functions
+{
+let createFullname = (firstName, lastName) => firstName + ' ' + lastName;
+}
+{
+    let createFullName = (firstName, lastName) => `${firstName} ${lastName}`;
+}
+
+// you do not need () if you have only 1 var 
+let someFunction = (a, b) => {
+    let result = '';
+    for(let i = 0; i < b; i++){
+    result += a;
+    }
+    return result;
+};
+//it is better to use const with your arrow functions so that that do not get changed
+
+//Callbacks
+let username = sentHttpRequest('getUser');
+console.log(user);
+//could get gummed up by a late input.
+
+
+function logUsername(user) {
+    console.log(user);
+}
+sendHttpRequest('getUser', logUsername);
+//better way that will only be read after the input has been given.
+
+sendHttpRequest('getUser', user => console.log(user));
+
+//arrow functions practice
+function myFunction(num) { return Math.sqrt(num); }
+
+const returnSquareRoot = (num) => Math.sqrt(num);
+
+function myFunction(yearlyPayment) {
+    let monthly = yearlyPayment / 12;
+    return monthly.toFixed(2);
+}
+
+const monthlyPayment = yearlyPayment => {
+   let monthly = yearlyPayment / 12;
+   return monthly.toFixed(2);
+};
+
+function myFunction(num1, num2) {
+    return num1 ^ num2;
+}
+
+const xor = (num1, num2) => num1 ^ num2;
+
+function myFunction(num1, num2) {
+    return Math.sqrt((num1 * num2) + (num2 * num2));
+}
+
+const pythagoras = (num1, num2) => Math.sqrt((num1 * num2) + (num2 * num2));
+
+function addTwoInputs (a, b) {
+    return a + b;
+}
+
+const returnSum = (a, b) => a + b;
+
+function myFunction(value) { 
+    return !value; 
+}
+
+const revert = (value) => !value;
+
+function myFunction(num1, num2, num3) {
+    let value = 0;
+    for(let i = 0; i < num3; i++){
+        value = (value + num2) * num1;
+    }
+    return value / (num1 * (num3 *10));
+}
+
+const fancyAlgorithm = (num1, num2, num3) => {
+    let value = 0;
+    for(let i = 0; i < num3; i++){
+        value = (value + num2) * num1;
+    }
+    return value / (num1 * (num3 *10));
+};
+
+//promises
+
+function handleEvent(value) {
+    console.log(value);
+}
+
+function handleError(err) {
+    console.log(err);
+}
+
+doSomeThingThatReturnesAPromise()
+    .then(handleEvent)
+    .catch(handleError);
+
+doSomeThingThatReturnesAPromise()
+    .then((value) => {
+        console.log(value)
+    }).catch((err) => {
+        console.log(err);
+    });
+
+
+//classes
+//each class should only be in charge of one thing. Holding all the things that are important to the thing the class is holding
+
+
+class Student {
+    constructor() {
+        this.firstName = 'Sam';
+        this.lastName = 'Smith';
+        this.phoneNumber = '4795555555';
+        this.grade = 'A';
+    }
+}
+// is not dynamic and won't work correctly for what is needed
+
+class Student {
+    constructor(firstName, lastName, phoneNumber, grade) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.grade = grade;
+    }
+
+    indroduce() {
+        console.log(`${this.firstName} ${this.lastName} can be reached at ${this.phoneNumber}`);
+    }
+}
+let student1 = new Student('Tom', 'Smith', '4795211234', 'B');
+let student2 = new Student('Sam', 'Thompson', '4793211234', 'A');
+
+student1.introduce();
+student2.introduce();
+
+
+
+//Inheritance
+
+
+//Both of these classes have simular code, we can make a larger parent class to take care of elements of these classes
+
+
+
+class PromotionSender {
+    constructor() {
+
+    }
+
+ sendNotification(notification) {
+    console.log('Sending: ' + notification);
+ }
+
+ findUserWithStatus(status) {
+    let users = getUsers(status);
+    return users;
+ }
+
+ calculateDiscount(status) {
+    if (status === 'Gold') {
+        return .3;
+    } else if (status === 'Silver') {
+        return .15;
+    }
+    return 0;
+ }
+}
+
+class CollectionsSender {
+    constructor() {
+
+    }
+
+    sendNotification(notification) {
+        console.log('Sending: ' + notification);
+    }
+
+    findUserWithStatus(status) {
+        let users = getUsers(status);
+        return users;
+     }
+
+    calculateFee(status) {
+        if (status === 'OVERDUE') {
+            return 10;
+        } else if (status === 'DELIQUENT') {
+            return 25;
+        }
+        return 5;
+    }
+}
+
+
+
+//Parent class that can take common code from the previous classes
+
+class NotificationSender {
+    constructor(status) {
+        this.status = status;
+    }
+    sendNotification(notification) {
+        console.log('Sending: ' + notification);
+    }
+
+    findUserWithStatus(status) {
+        let users = getUsers(status);
+        return users;
+     }
+}
+
+//Changed classes that work with the parent class 
+//The "extends" keyword is used to inherit from another class
+//The "super" keyword refers to the parent class that was determined by the "extends" keyword. When the super keyword is followed by () it is refering to the parent class constructor. super is like the "this" keyword. You must always call the parent class' constructer in a class that extends another class. 
+
+class PromotionSender extends NotificationSender {
+    constructor(status) {
+        super(status);
+    }
+
+ calculateDiscount(status) {
+    if (status === 'Gold') {
+        return .3;
+    } else if (status === 'Silver') {
+        return .15;
+    }
+    return 0;
+ }
+}
+
+class CollectionsSender extends NotificationSender {
+    constructor(status) {
+        super(status);
+    }
+
+    calculateFee(status) {
+        if (status === 'OVERDUE') {
+            return 10;
+        } else if (status === 'DELIQUENT') {
+            return 25;
+        }
+        return 5;
+    }
+}
+
+let collectionsSender = new CollectionsSender('OVERDUE');
+collectionsSender.sendNotification('this is a test collections notification')
